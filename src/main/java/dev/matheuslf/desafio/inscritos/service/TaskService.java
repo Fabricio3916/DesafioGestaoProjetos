@@ -2,6 +2,7 @@ package dev.matheuslf.desafio.inscritos.service;
 
 import dev.matheuslf.desafio.inscritos.entity.Project;
 import dev.matheuslf.desafio.inscritos.entity.Task;
+import dev.matheuslf.desafio.inscritos.entity.enums.Status;
 import dev.matheuslf.desafio.inscritos.repository.ProjectRepository;
 import dev.matheuslf.desafio.inscritos.repository.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,13 @@ public class TaskService {
 
     public Optional<Task> findTaskById(Long id) {
         return repository.findById(id);
+    }
+
+    public Task updateStatus(Long id, Status newStatus) {
+        Task task = findTaskById(id)
+                .orElseThrow(() -> new RuntimeException("Task não encontrada com id: " + id));
+        task.setStatus(newStatus);
+        return repository.save(task);
     }
 
     public void deleteTask(Long id) {

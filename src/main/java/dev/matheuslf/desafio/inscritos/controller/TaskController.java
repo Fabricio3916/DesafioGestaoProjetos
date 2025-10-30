@@ -1,8 +1,10 @@
 package dev.matheuslf.desafio.inscritos.controller;
 
 import dev.matheuslf.desafio.inscritos.controller.request.TaskRequest;
+import dev.matheuslf.desafio.inscritos.controller.request.UpdateStatusRequest;
 import dev.matheuslf.desafio.inscritos.controller.response.TaskResponse;
 import dev.matheuslf.desafio.inscritos.entity.Task;
+import dev.matheuslf.desafio.inscritos.entity.enums.Status;
 import dev.matheuslf.desafio.inscritos.mapper.TaskMapper;
 import dev.matheuslf.desafio.inscritos.service.TaskService;
 import org.springframework.http.HttpStatus;
@@ -34,6 +36,26 @@ public class TaskController {
                 .toList();
         return ResponseEntity.status(HttpStatus.FOUND).body(tasks);
 
+    }
+
+/*    @GetMapping()
+    public ResponseEntity<TaskResponse> findTaskByFilter(){
+
+    }*/
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<TaskResponse> updateTaskStatus(
+            @PathVariable Long id,
+            @RequestBody UpdateStatusRequest request) {
+
+        Task updatedTask = service.updateStatus(id, request.status());
+        return ResponseEntity.ok(TaskMapper.toResponse(updatedTask));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
+        service.deleteTask(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
