@@ -7,6 +7,7 @@ import dev.matheuslf.desafio.inscritos.entity.Task;
 import dev.matheuslf.desafio.inscritos.entity.enums.Status;
 import dev.matheuslf.desafio.inscritos.mapper.TaskMapper;
 import dev.matheuslf.desafio.inscritos.service.TaskService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<TaskResponse> createTask(@RequestBody TaskRequest request) {
+    public ResponseEntity<TaskResponse> createTask(@RequestBody @Valid TaskRequest request) {
         Task task = service.saveTask(TaskMapper.toEntity(request));
         return ResponseEntity.ok(TaskMapper.toResponse(task));
     }
@@ -46,7 +47,7 @@ public class TaskController {
     @PutMapping("/{id}/status")
     public ResponseEntity<TaskResponse> updateTaskStatus(
             @PathVariable Long id,
-            @RequestBody UpdateStatusRequest request) {
+            @RequestBody @Valid UpdateStatusRequest request) {
 
         Task updatedTask = service.updateStatus(id, request.status());
         return ResponseEntity.ok(TaskMapper.toResponse(updatedTask));
