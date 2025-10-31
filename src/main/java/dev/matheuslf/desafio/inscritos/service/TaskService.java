@@ -1,7 +1,9 @@
 package dev.matheuslf.desafio.inscritos.service;
 
+import dev.matheuslf.desafio.inscritos.controller.request.TaskFilterRequest;
 import dev.matheuslf.desafio.inscritos.entity.Project;
 import dev.matheuslf.desafio.inscritos.entity.Task;
+import dev.matheuslf.desafio.inscritos.entity.enums.Priority;
 import dev.matheuslf.desafio.inscritos.entity.enums.Status;
 import dev.matheuslf.desafio.inscritos.repository.ProjectRepository;
 import dev.matheuslf.desafio.inscritos.repository.TaskRepository;
@@ -27,8 +29,8 @@ public class TaskService {
         return repository.save(task);
     }
 
-    public List<Task> findAllTasks() {
-        return repository.findAll();
+    public List<Task> findTasks(TaskFilterRequest request) {
+        return repository.findByFilters(request.status(),request.priority(),request.projectId());
     }
 
     public Optional<Task> findTaskById(Long id) {

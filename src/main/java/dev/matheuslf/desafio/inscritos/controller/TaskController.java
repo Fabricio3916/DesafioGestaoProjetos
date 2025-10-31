@@ -1,9 +1,11 @@
 package dev.matheuslf.desafio.inscritos.controller;
 
+import dev.matheuslf.desafio.inscritos.controller.request.TaskFilterRequest;
 import dev.matheuslf.desafio.inscritos.controller.request.TaskRequest;
 import dev.matheuslf.desafio.inscritos.controller.request.UpdateStatusRequest;
 import dev.matheuslf.desafio.inscritos.controller.response.TaskResponse;
 import dev.matheuslf.desafio.inscritos.entity.Task;
+import dev.matheuslf.desafio.inscritos.entity.enums.Priority;
 import dev.matheuslf.desafio.inscritos.entity.enums.Status;
 import dev.matheuslf.desafio.inscritos.mapper.TaskMapper;
 import dev.matheuslf.desafio.inscritos.service.TaskService;
@@ -31,18 +33,12 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TaskResponse>> findAllTasks() {
-        List<TaskResponse> tasks = service.findAllTasks().stream()
+    public ResponseEntity<List<TaskResponse>> findAllTasks(TaskFilterRequest request){
+        List<TaskResponse> tasks = service.findTasks(request).stream()
                 .map(TaskMapper::toResponse)
                 .toList();
-        return ResponseEntity.status(HttpStatus.FOUND).body(tasks);
-
+        return ResponseEntity.ok(tasks);
     }
-
-/*    @GetMapping()
-    public ResponseEntity<TaskResponse> findTaskByFilter(){
-
-    }*/
 
     @PutMapping("/{id}/status")
     public ResponseEntity<TaskResponse> updateTaskStatus(
