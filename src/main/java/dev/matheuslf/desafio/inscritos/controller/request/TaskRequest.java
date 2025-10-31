@@ -13,7 +13,7 @@ public record TaskRequest(@Size(min = 5, max = 150) @NotNull(message = "Titulo n
                           String description,
                           @NotNull(message = "Status não pode ser nulo")
                           Status status,
-                          @NotNull(message = "Status não pode ser nulo")
+                          @NotNull(message = "Priority não pode ser nulo")
                           Priority priority,
                           LocalDate dueDate,
                           Long project
