@@ -1,5 +1,6 @@
 package dev.matheuslf.desafio.inscritos.config;
 
+import dev.matheuslf.desafio.inscritos.exception.TaskNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -27,6 +28,14 @@ public class ControllerAdvice {
         Map<String, String> error = Map.of(
                 "status", "Valor inválido."
         ); //melhorar mensagem de erro
+        return ResponseEntity.badRequest().body(error);
+    }
+
+    @ExceptionHandler(TaskNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handTaskNotFoundException(TaskNotFoundException ex) {
+        Map<String, String> error = Map.of(
+                "status", ex.getMessage()
+        );
         return ResponseEntity.badRequest().body(error);
     }
 
