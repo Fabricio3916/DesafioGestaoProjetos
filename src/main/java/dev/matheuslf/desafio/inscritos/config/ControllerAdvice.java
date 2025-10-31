@@ -1,5 +1,6 @@
 package dev.matheuslf.desafio.inscritos.config;
 
+import dev.matheuslf.desafio.inscritos.exception.InvalidLoginException;
 import dev.matheuslf.desafio.inscritos.exception.TaskNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -26,15 +27,23 @@ public class ControllerAdvice {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Map<String, String>> handleEnumError(HttpMessageNotReadableException ex) {
         Map<String, String> error = Map.of(
-                "status", "Valor inválido."
+                "Error", "Valor inválido."
         ); //melhorar mensagem de erro
         return ResponseEntity.badRequest().body(error);
     }
 
     @ExceptionHandler(TaskNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handTaskNotFoundException(TaskNotFoundException ex) {
+    public ResponseEntity<Map<String, String>> handleTaskNotFoundException(TaskNotFoundException ex) {
         Map<String, String> error = Map.of(
-                "status", ex.getMessage()
+                "Error", ex.getMessage()
+        );
+        return ResponseEntity.badRequest().body(error);
+    }
+
+    @ExceptionHandler(InvalidLoginException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidLoginException(InvalidLoginException ex) {
+        Map<String, String> error = Map.of(
+                "Error", ex.getMessage()
         );
         return ResponseEntity.badRequest().body(error);
     }

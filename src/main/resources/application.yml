@@ -1,6 +1,6 @@
 spring:
   application:
-    name: "Sistema_De_Gestão_De_Projetos"
+    name: "Sistema_De_Gestï¿½o_De_Projetos"
 
   datasource:
     url: jdbc:postgresql://localhost:5431/SistemaGestao
@@ -16,3 +16,7 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migration
+
+app:
+  secret:
+    key: "password_encoder"
