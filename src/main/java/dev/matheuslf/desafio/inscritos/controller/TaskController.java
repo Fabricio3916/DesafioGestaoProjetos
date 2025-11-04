@@ -4,6 +4,7 @@ import dev.matheuslf.desafio.inscritos.controller.request.TaskFilterRequest;
 import dev.matheuslf.desafio.inscritos.controller.request.TaskRequest;
 import dev.matheuslf.desafio.inscritos.controller.request.UpdateStatusRequest;
 import dev.matheuslf.desafio.inscritos.controller.response.TaskResponse;
+import dev.matheuslf.desafio.inscritos.documentation.TaskDocumentation;
 import dev.matheuslf.desafio.inscritos.entity.Task;
 import dev.matheuslf.desafio.inscritos.entity.enums.Priority;
 import dev.matheuslf.desafio.inscritos.entity.enums.Status;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/tasks")
-public class TaskController {
+public class TaskController implements TaskDocumentation {
 
     private final TaskService service;
 
