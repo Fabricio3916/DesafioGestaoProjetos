@@ -1,5 +1,6 @@
 package dev.matheuslf.desafio.inscritos.controller;
 
+import dev.matheuslf.desafio.inscritos.documentation.ProjectDocumentation;
 import dev.matheuslf.desafio.inscritos.controller.request.ProjectRequest;
 import dev.matheuslf.desafio.inscritos.controller.response.ProjectResponse;
 import dev.matheuslf.desafio.inscritos.entity.Project;
@@ -14,7 +15,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/projects")
-public class ProjectController {
+
+public class ProjectController implements ProjectDocumentation {
 
     private final ProjectService service;
 
