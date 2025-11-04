@@ -4,6 +4,7 @@ import dev.matheuslf.desafio.inscritos.config.TokenConfig;
 import dev.matheuslf.desafio.inscritos.controller.request.UserRequest;
 import dev.matheuslf.desafio.inscritos.controller.response.LoginResponse;
 import dev.matheuslf.desafio.inscritos.controller.response.UserResponse;
+import dev.matheuslf.desafio.inscritos.documentation.AuthDocumentation;
 import dev.matheuslf.desafio.inscritos.entity.User;
 import dev.matheuslf.desafio.inscritos.mapper.UserMapper;
 import dev.matheuslf.desafio.inscritos.service.UserService;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
-public class AuthController {
+public class AuthController implements AuthDocumentation {
 
     private final UserService service;
     private final AuthenticationManager authManager;
@@ -34,7 +35,6 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody UserRequest request) {
         var authToken = new UsernamePasswordAuthenticationToken(request.username(), request.password());
         Authentication auth = authManager.authenticate(authToken);
