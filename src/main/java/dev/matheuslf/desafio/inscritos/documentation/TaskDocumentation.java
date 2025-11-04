@@ -31,7 +31,7 @@ public interface TaskDocumentation {
     @Operation(summary = "Listar tarefas", description = "Lista todas as tarefas com filtros opcionais",
             security = @SecurityRequirement(name = "bearerAuth"))
     @ApiResponse(responseCode = "200", description = "Tarefas encontradas com sucesso",
-    content = @Content(array = @ArraySchema(schema = @Schema(implementation = TaskResponse.class))))
+            content = @Content(array = @ArraySchema(schema = @Schema(implementation = TaskResponse.class))))
     ResponseEntity<List<TaskResponse>> findAllTasks(TaskFilterRequest request);
 
     @Operation(summary = "Atualiza status da tarefa", description = "Realiza o update do status da tarefa",
