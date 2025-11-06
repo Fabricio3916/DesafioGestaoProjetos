@@ -76,7 +76,6 @@ Você pode conectar usando ferramentas como DBeaver, pgAdmin ou qualquer cliente
 - PostgreSQL 17
 - Maven
 - Docker & Docker Compose
-- Flyway (migrations)
 - Swagger/OpenAPI
 
 ## 📝 Endpoints da API
