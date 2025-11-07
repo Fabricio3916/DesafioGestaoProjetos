@@ -1,6 +1,7 @@
 package dev.matheuslf.desafio.inscritos.service;
 
 import dev.matheuslf.desafio.inscritos.entity.Project;
+import dev.matheuslf.desafio.inscritos.exception.ProjectNotFoundException;
 import dev.matheuslf.desafio.inscritos.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,8 @@ public class ProjectService {
     }
 
     public Optional<Project> findProjectById(Long id) {
-        return repository.findById(id);
+        return Optional.ofNullable(repository.findById(id)
+                .orElseThrow(() -> new ProjectNotFoundException("Projeto não foi encontrado.")));
     }
 
 }
